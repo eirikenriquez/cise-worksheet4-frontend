@@ -1,5 +1,7 @@
 import { FormEvent, useState } from "react";
 import formStyles from "../../styles/Form.module.scss";
+import axios from "axios";
+
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState<string[]>([]);
@@ -8,6 +10,7 @@ const NewDiscussion = () => {
   const [doi, setDoi] = useState("");
   const [summary, setSummary] = useState("");
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
+
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     console.log(
       JSON.stringify({
@@ -21,6 +24,7 @@ const NewDiscussion = () => {
       })
     );
   };
+
   // Some helper methods for the authors array
   const addAuthor = () => {
     setAuthors(authors.concat([""]));
@@ -133,4 +137,5 @@ const NewDiscussion = () => {
     </div>
   );
 };
+
 export default NewDiscussion;
