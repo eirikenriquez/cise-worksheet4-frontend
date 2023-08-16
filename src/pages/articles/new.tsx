@@ -12,6 +12,16 @@ const NewDiscussion = () => {
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
 
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
+    axios.post("http://localhost:8082/api/articles", {
+      title,
+      authors,
+      source,
+      publication_year: pubYear,
+      doi,
+      summary,
+      linked_discussion: linkedDiscussion,
+    });
+
     console.log(
       JSON.stringify({
         title,
