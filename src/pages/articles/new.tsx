@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import formStyles from "../../styles/Form.module.scss";
-import axios from "axios";
+import SubmissionForm from "../../components/SubmissionForm";
 
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
@@ -12,15 +12,7 @@ const NewDiscussion = () => {
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
 
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
-    axios.post("http://localhost:8082/api/articles", {
-      title,
-      authors,
-      source,
-      publication_year: pubYear,
-      doi,
-      summary,
-      linked_discussion: linkedDiscussion,
-    });
+    event.preventDefault();
 
     console.log(
       JSON.stringify({
@@ -51,6 +43,8 @@ const NewDiscussion = () => {
   };
   // Return the full form
   return (
+    <SubmissionForm />
+    /*
     <div className="container">
       <h1>New Article</h1>
       <form className={formStyles.form} onSubmit={submitNewArticle}>
@@ -145,6 +139,7 @@ const NewDiscussion = () => {
         </button>
       </form>
     </div>
+    */
   );
 };
 
