@@ -1,32 +1,28 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import formStyles from "../styles/Form.module.scss";
+import axios from "axios";
 
 export default function SubmissionForm() {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     const url = "http://localhost:8082/api/articles";
 
-    const realAuthors = data.authors.split(",");
-    data.authors = realAuthors;
+    try {
+      const realAuthors = data.authors.split(",");
+      data.authors = realAuthors;
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log("Response:", responseData);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+      const response = await axios.post(url, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
