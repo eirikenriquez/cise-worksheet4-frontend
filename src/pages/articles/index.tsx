@@ -2,6 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import SortableTable from "../../components/table/SortableTable";
 import data from "../../utils/dummydata.json";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface ArticlesInterface {
   id: string;
@@ -33,9 +34,10 @@ const Articles: NextPage<ArticlesProps> = ({ articles: initialArticles }) => {
 
   useEffect(() => {
     // Fetch articles from the API
-    fetch("http://localhost:8082/api/articles")
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get("http://localhost:8082/api/articles")
+      .then((response) => {
+        const data = response.data;
         console.log(data);
         const fetchedArticles: ArticlesInterface[] = data.map(
           (article: any) => ({
