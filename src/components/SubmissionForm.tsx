@@ -11,15 +11,6 @@ export default function SubmissionForm() {
     const realAuthors = data.authors.split(",");
     data.authors = realAuthors;
 
-    data.description = "";
-    if (data.claims) {
-      data.description += "Claim: " + data.claim;
-    }
-
-    if (data.evidence) {
-      data.description += "Evidence: " + data.evidence;
-    }
-
     const requestOptions = {
       method: "POST",
       headers: {
